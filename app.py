@@ -1,14 +1,13 @@
 import streamlit as st
 import requests
 import json
-import os
+import os # Import the os module to access environment variables
 
 # --- Configuration ---
-# The API key will be provided by the environment in Canvas.
-# If running locally, you might need to set this as an environment variable
-# or replace with your actual API key for testing.
-# For security, never hardcode API keys in production code.
-API_KEY = "AIzaSyDFv4JemfnY0Lpqail1pjYwAHSs5AASx1o" # Or set your key here for local testing: "YOUR_GEMINI_API_KEY"
+# The API key will be provided by the environment.
+# It's recommended to set this as an environment variable (e.g., GEMINI_API_KEY).
+# For local testing, you can temporarily hardcode it, but remove before committing to public repo.
+API_KEY = os.getenv("GEMINI_API_KEY", "") # Reads API key from environment variable, default to empty string if not found
 GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={API_KEY}"
 
 # --- Streamlit App Setup ---
@@ -27,6 +26,10 @@ def get_gemini_response(user_message):
     """
     Sends the user's symptoms to the Gemini API and gets a department recommendation.
     """
+    if not API_KEY:
+        st.error("Gemini API Key not set. Please set the GEMINI_API_KEY environment variable.")
+        return "Error: API key is missing. Please configure it."
+
     prompt = f"""
     You are a medical symptom analysis chatbot. Your goal is to recommend the most appropriate medical department or specialist based on the symptoms provided by the user.
     Do NOT provide medical advice, diagnoses, or treatment. Only recommend a department.
