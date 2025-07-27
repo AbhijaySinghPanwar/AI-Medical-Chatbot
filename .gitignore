@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.streamlit/local/
+
+# IDEs and OS
+.vscode/        # VS Code settings
+.idea/          # PyCharm/IntelliJ IDEA settings
+.DS_Store       # macOS specific
+Thumbs.db       # Windows specific
+
+# Environment variables / sensitive data
+.env            # Common for environment variables
+*.env           # More general .env files
+*.pem           # Private keys
+*.key           # Key files (e.g., API keys)
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Streamlit specific
+# Streamlit creates a .streamlit folder for local config and cache
+.streamlit/
